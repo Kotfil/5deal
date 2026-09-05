@@ -1,31 +1,27 @@
 import Link from 'next/link';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
+import { CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-
-interface AssetItemProps {
-  asset: any;
-  user: any;
-  onDelete: (id: string) => void;
-}
+import { AssetItemProps } from './asset-item.interface';
+import { StyledCard, StyledDescription, StyledPriceRow, StyledPrice, StyledCategory } from './asset-item.styles';
 
 export function AssetItem({ asset, user, onDelete }: AssetItemProps) {
   return (
-    <Card className="flex flex-col">
+    <StyledCard>
       <CardHeader>
         <CardTitle>{asset.title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-1">
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+        <StyledDescription>
           {asset.description}
-        </p>
-        <div className="flex justify-between items-center text-sm">
-          <span className="font-semibold text-primary">
+        </StyledDescription>
+        <StyledPriceRow>
+          <StyledPrice>
             {asset.price ? `$${Number(asset.price).toLocaleString()}` : 'Цена по запросу'}
-          </span>
-          <span className="bg-muted px-2 py-1 rounded-md text-xs uppercase tracking-wider">
+          </StyledPrice>
+          <StyledCategory>
             {asset.category}
-          </span>
-        </div>
+          </StyledCategory>
+        </StyledPriceRow>
       </CardContent>
       <CardFooter className="gap-2">
         <Link href={`/assets/${asset.id}`} className="flex-1">
@@ -39,6 +35,6 @@ export function AssetItem({ asset, user, onDelete }: AssetItemProps) {
           </Button>
         )}
       </CardFooter>
-    </Card>
+    </StyledCard>
   );
 }

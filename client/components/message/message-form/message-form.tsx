@@ -3,10 +3,8 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-
-interface MessageFormProps {
-  onSend: (recipientId: string, body: string) => void;
-}
+import { MessageFormProps } from './message-form.interface';
+import { FormSpace, InputGroup } from './message-form.styles';
 
 export function MessageForm({ onSend }: MessageFormProps) {
   const [recipientId, setRecipientId] = useState('');
@@ -24,25 +22,25 @@ export function MessageForm({ onSend }: MessageFormProps) {
         <CardTitle>Написать сообщение</CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
+        <FormSpace onSubmit={handleSubmit}>
+          <InputGroup>
             <Label>UUID Получателя</Label>
             <Input 
               value={recipientId}
               onChange={e => setRecipientId(e.target.value)}
               placeholder="UUID пользователя..."
             />
-          </div>
-          <div className="space-y-2">
+          </InputGroup>
+          <InputGroup>
             <Label>Сообщение</Label>
             <Input 
               value={body}
               onChange={e => setBody(e.target.value)}
               placeholder="Текст сообщения..."
             />
-          </div>
+          </InputGroup>
           <Button type="submit" className="w-full">Отправить</Button>
-        </form>
+        </FormSpace>
       </CardContent>
     </Card>
   );

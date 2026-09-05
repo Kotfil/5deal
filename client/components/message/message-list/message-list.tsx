@@ -1,13 +1,8 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { MessageItem } from './message-item/message-item';
-
-interface MessageListProps {
-  messages: any[];
-  isLoading: boolean;
-  currentUserId: string;
-  onRead: (id: string) => void;
-}
+import { MessageListProps } from './message-list.interface';
+import { StyledScrollArea, EmptyState, ListSpace } from './message-list.styles';
 
 export function MessageList({ messages, isLoading, currentUserId, onRead }: MessageListProps) {
   return (
@@ -17,23 +12,28 @@ export function MessageList({ messages, isLoading, currentUserId, onRead }: Mess
       </CardHeader>
       <CardContent className="space-y-4">
         {isLoading && messages.length === 0 ? (
-          <div className="space-y-2">
-            <Skeleton className="h-16 w-full" />
-            <Skeleton className="h-16 w-full" />
-          </div>
-        ) : messages.length === 0 ? (
-          <p className="text-muted-foreground text-sm">У вас пока нет сообщений.</p>
-        ) : (
-          <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
-            {messages.map(msg => (
-              <MessageItem 
-                key={msg.id} 
-                message={msg} 
-                currentUserId={currentUserId} 
-                onRead={onRead} 
-              />
+          <ListSpace>
+            {[1, 2, 3].map((i) => (
+              <Skeleton key={i} className="h-20 w-full" />
             ))}
-          </div>
+          </ListSpace>
+        ) : messages.length === 0 ? (
+          <EmptyState>
+            Нет сообщений
+          </EmptyState>
+        ) : (
+          <StyledScrollArea>
+            <ListSpace>
+              {messages.map((message) => (
+                <MessageItem 
+                  key={message.id} 
+                  message={message} 
+                  currentUserId={currentUserId}
+                  onRead={onRead}
+                />
+              ))}
+            </ListSpace>
+          </StyledScrollArea>
         )}
       </CardContent>
     </Card>

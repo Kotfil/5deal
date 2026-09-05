@@ -1,34 +1,29 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { AssetItem } from './asset-item/asset-item';
-
-interface AssetListProps {
-  assets: any[];
-  isLoading: boolean;
-  user: any;
-  onDelete: (id: string) => void;
-}
+import { AssetListProps } from './asset-list.interface';
+import { ListGrid, EmptyState } from './asset-list.styles';
 
 export function AssetList({ assets, isLoading, user, onDelete }: AssetListProps) {
   if (isLoading && assets.length === 0) {
     return (
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <ListGrid>
         {[1, 2, 3].map((i) => (
           <Skeleton key={i} className="h-[200px] w-full" />
         ))}
-      </div>
+      </ListGrid>
     );
   }
 
   if (assets.length === 0) {
     return (
-      <div className="text-center py-12 text-muted-foreground">
+      <EmptyState>
         Нет доступных ассетов
-      </div>
+      </EmptyState>
     );
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <ListGrid>
       {assets.map((asset) => (
         <AssetItem 
           key={asset.id} 
@@ -37,6 +32,6 @@ export function AssetList({ assets, isLoading, user, onDelete }: AssetListProps)
           onDelete={onDelete} 
         />
       ))}
-    </div>
+    </ListGrid>
   );
 }

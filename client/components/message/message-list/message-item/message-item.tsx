@@ -1,26 +1,23 @@
-interface MessageItemProps {
-  message: any;
-  currentUserId: string;
-  onRead: (id: string) => void;
-}
+import { MessageItemProps } from './message-item.interface';
+import { ItemWrapper, HeaderRow, SenderLabel, StatusLabel } from './message-item.styles';
 
 export function MessageItem({ message, currentUserId, onRead }: MessageItemProps) {
   const isReceived = message.recipient.id === currentUserId;
 
   return (
-    <div 
-      className={`p-3 rounded-lg text-sm ${isReceived ? 'bg-secondary' : 'border'}`}
+    <ItemWrapper 
+      $isReceived={isReceived}
       onClick={() => {
         if (isReceived && message.status !== 'read') onRead(message.id);
       }}
     >
-      <div className="flex justify-between items-center mb-1">
-        <span className="font-semibold text-xs opacity-70">
+      <HeaderRow>
+        <SenderLabel>
           {isReceived ? `От: ${message.sender.email}` : `Кому: ${message.recipient.email}`}
-        </span>
-        <span className="text-[10px] uppercase opacity-50">{message.status}</span>
-      </div>
+        </SenderLabel>
+        <StatusLabel>{message.status}</StatusLabel>
+      </HeaderRow>
       <p>{message.body}</p>
-    </div>
+    </ItemWrapper>
   );
 }

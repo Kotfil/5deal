@@ -111,7 +111,7 @@ export default function EditAssetPage() {
             
             <div className="space-y-2">
               <Label htmlFor="category">Категория</Label>
-              <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})}>
+              <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value || 'business'})}>
                 <SelectTrigger id="category">
                   <SelectValue placeholder="Выберите категорию" />
                 </SelectTrigger>
