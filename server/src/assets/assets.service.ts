@@ -27,14 +27,14 @@ export class AssetsService {
 
   async getAllAssets(): Promise<Asset[]> {
     return this.assetRepository.find({
-      relations: ['images', 'seller', 'seller.sellerProfile'],
+      relations: { images: true, seller: { sellerProfile: true } },
     });
   }
 
   async getAssetById(id: string): Promise<Asset> {
     const asset = await this.assetRepository.findOne({
       where: { id },
-      relations: ['images', 'seller', 'seller.sellerProfile'],
+      relations: { images: true, seller: { sellerProfile: true } },
     });
 
     if (!asset) {

@@ -49,16 +49,16 @@ export class UsersService {
       await this.sellerProfileRepository.save(profile);
     }
 
-    return this.userRepository.findOne({
+    return this.userRepository.findOneOrFail({
       where: { id: user.id },
-      relations: ['buyerProfile', 'sellerProfile'],
+      relations: { buyerProfile: true, sellerProfile: true },
     });
   }
 
   async getProfile(id: string): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { id },
-      relations: ['buyerProfile', 'sellerProfile'],
+      relations: { buyerProfile: true, sellerProfile: true },
     });
 
     if (!user) {

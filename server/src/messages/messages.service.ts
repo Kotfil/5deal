@@ -34,7 +34,7 @@ export class MessagesService {
         { sender: { id: userId } },
         { recipient: { id: userId } },
       ],
-      relations: ['sender', 'recipient'],
+      relations: { sender: true, recipient: true },
       order: { createdAt: 'DESC' },
     });
   }
