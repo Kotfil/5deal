@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { REGISTER_INITIAL_VALUES, REGISTER_ROLES } from './register-form.initial';
 
 interface RegisterFormProps {
@@ -65,16 +66,16 @@ export function RegisterForm({ onSubmit }: RegisterFormProps) {
 
           <div className="space-y-2">
             <Label htmlFor="role">Роль</Label>
-            <select 
-              id="role"
-              className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-              value={formData.role}
-              onChange={(e) => setFormData({...formData, role: e.target.value})}
-            >
-              {REGISTER_ROLES.map(role => (
-                <option key={role.value} value={role.value}>{role.label}</option>
-              ))}
-            </select>
+            <Select value={formData.role} onValueChange={(value) => setFormData({...formData, role: value})}>
+              <SelectTrigger id="role">
+                <SelectValue placeholder="Выберите роль" />
+              </SelectTrigger>
+              <SelectContent>
+                {REGISTER_ROLES.map(role => (
+                  <SelectItem key={role.value} value={role.value}>{role.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           <Button type="submit" className="w-full mt-4">Зарегистрироваться</Button>

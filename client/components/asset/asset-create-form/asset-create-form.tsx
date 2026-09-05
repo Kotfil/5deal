@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ASSET_CREATE_INITIAL_VALUES, ASSET_CATEGORIES } from './asset-create-form.initial';
 
 interface AssetCreateFormProps {
@@ -58,18 +59,18 @@ export function AssetCreateForm({ onSubmit }: AssetCreateFormProps) {
             
             <div className="space-y-2">
               <Label htmlFor="category">Категория</Label>
-              <select 
-                id="category"
-                className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                value={formData.category}
-                onChange={(e) => setFormData({...formData, category: e.target.value})}
-              >
-                {ASSET_CATEGORIES.map(category => (
-                  <option key={category.value} value={category.value}>
-                    {category.label}
-                  </option>
-                ))}
-              </select>
+              <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})}>
+                <SelectTrigger id="category">
+                  <SelectValue placeholder="Выберите категорию" />
+                </SelectTrigger>
+                <SelectContent>
+                  {ASSET_CATEGORIES.map(category => (
+                    <SelectItem key={category.value} value={category.value}>
+                      {category.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
 

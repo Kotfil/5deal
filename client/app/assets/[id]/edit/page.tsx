@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
 
 export default function EditAssetPage() {
@@ -110,18 +111,18 @@ export default function EditAssetPage() {
             
             <div className="space-y-2">
               <Label htmlFor="category">Категория</Label>
-              <select 
-                id="category"
-                className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                value={formData.category}
-                onChange={(e) => setFormData({...formData, category: e.target.value})}
-              >
-                <option value="business">Бизнес</option>
-                <option value="real_estate">Недвижимость</option>
-                <option value="startup">Стартап</option>
-                <option value="franchise">Франшиза</option>
-                <option value="other">Другое</option>
-              </select>
+              <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})}>
+                <SelectTrigger id="category">
+                  <SelectValue placeholder="Выберите категорию" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="business">Бизнес</SelectItem>
+                  <SelectItem value="real_estate">Недвижимость</SelectItem>
+                  <SelectItem value="startup">Стартап</SelectItem>
+                  <SelectItem value="franchise">Франшиза</SelectItem>
+                  <SelectItem value="other">Другое</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
