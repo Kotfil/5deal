@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Message } from '../entities/message.entity';
 import { SendMessageDto } from './dto/send-message.dto';
 import { UsersService } from '../users/users.service';
-import { MessageStatus } from '../../src/enums/message-status.enum';
+import { MessageStatus } from '../enums/message-status.enum';
 
 @Injectable()
 export class MessagesService {

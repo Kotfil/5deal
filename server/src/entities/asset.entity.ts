@@ -35,10 +35,10 @@ export class Asset {
   @Column({ type: 'numeric', precision: 18, scale: 2, nullable: true })
   price: number | null;
 
-  @Column({ length: 100, nullable: true })
+  @Column({ type: 'varchar', length: 100, nullable: true })
   country: string | null;
 
-  @Column({ length: 100, nullable: true })
+  @Column({ type: 'varchar', length: 100, nullable: true })
   industry: string | null;
 
   /** Annual revenue (USD) — for quick screening */
