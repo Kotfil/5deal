@@ -25,16 +25,19 @@ export default function EditProfilePage() {
   });
 
   useEffect(() => {
-    if (user && user.sellerProfile) {
-      setFormData({
-        firstName: user.sellerProfile.firstName || '',
-        lastName: user.sellerProfile.lastName || '',
-        company: user.sellerProfile.company || '',
-        position: user.sellerProfile.position || '',
-        bio: user.sellerProfile.bio || '',
-        phone: user.sellerProfile.phone || '',
-        country: user.sellerProfile.country || ''
-      });
+    if (user) {
+      const profile = user.role === 'buyer' ? user.buyerProfile : user.sellerProfile;
+      if (profile) {
+        setFormData({
+          firstName: profile.firstName || '',
+          lastName: profile.lastName || '',
+          company: profile.company || '',
+          position: profile.position || '',
+          bio: profile.bio || '',
+          phone: profile.phone || '',
+          country: profile.country || ''
+        });
+      }
     }
   }, [user]);
 
